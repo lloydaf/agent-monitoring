@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Agent Entry Form</title>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+
+
+</head>
+<body>
+<?php
+include('../UI/header.html');
+include('../Backend/connect.php');
+$user=$_SESSION["username"];
+$query=mysqli_query($con,"SELECT * from live_sessions where username = '$user'");
+$row_no=mysqli_num_rows($query);
+if($row_no==1)
+{
+?>
+<p>Kindly Enter the details of the new agent into the form below:<br></p>
+<form id="main_form" action="../Backend/agent_add.php" method="post">
+
+<p style="font-weight:bold">Agent Name:<span style="color:Red">*</span><br></p>
+<input type="text" name="Agent_Name_form" placeholder="Enter Agent Name:" pattern="[A-Za-z ]+" required="required" title="Enter the Agent Name in letters only">
+
+<p style="font-weight:bold">Agent Address:<br></p>
+
+<p>Address Line 1:<span style="color:Red">*</span><br></p>
+<input type="text" name="Agent_Address_line1_form" placeholder="Enter Address Line 1:" pattern="[A-Za-z0-9 -_()]+" required="required" title="Please enter valid address">
+
+<p>Address Line 2:<br></p>
+<input type="text" name="Agent_Address_line2_form" placeholder="Enter Address Line 2:" pattern="[A-Za-z0-9 -_()]+" title="Enter the Agent Name in letters only">
+
+<p>Street<br></p>
+<input type="text" name="Agent_Address_street_form" placeholder="Enter Street:" pattern="[A-Za-z0-9 -_()]+" title="Enter the Agent Name in letters only">
+
+
+
+<p>Area:<span style="color:Red">*</span><br></p>
+<input type="text" name="Agent_Address_Area_form" placeholder="Enter Area:" pattern="[A-Za-z0-9 -_()]+" required="required" title="Enter the Agent Name in letters only">
+
+<p>State:<span style="color:Red">*</span><br></p>
+
+<select name="state" class="states" id="stateId">
+<option value="">Select State</option>
+</select>
+
+<p>City:<span style="color:Red">*</span><br></p>
+<input type="hidden" id="city_form" name="Agent_Address_City_form" required="required" pattern="[A-Za-z]+" title="Please enter a valid city" value=0>
+<select name="city" class="cities" id="cityId">
+<option value="">Select City</option>
+</select>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://lab.iamrohit.in/js/location.js"></script>
+<script>
+$(function() {
+  var loc = new locationInfo();
+      loc.getStates(101);
+});
+</script>
+
+
+<p style="font-weight:bold">Person of Contact:<span style="color:Red">*</span><br></p>
+<input type="text" name="POC_form" placeholder="Enter Person of Contact:" pattern="[A-Za-z ]+" required="required" title="Enter the Person of Contact's Name in letters only">
+
+<p style="font-weight:bold">Contact Number:<span style="color:Red">*</span><br></p>
+<p>+91  <input type="tel" minlength="10" maxlength="10" name="Contact_No_form" placeholder="Enter 10 digit number:" pattern="\d{10}" required="required" title="Enter valid phone number"></p>
+
+</form>
+<p><button type="submit" form="main_form" value="Submit" id="sub_but">Submit</button></p>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$('#sub_but').click(function (){
+	var city = $('#cityId').val();
+		$('#city_form').val(city);
+});
+</script>
+<button id="MainMenuButton" class="float-left submit-button">Go Back</button>
+<script type="text/javascript">
+    document.getElementById("MainMenuButton").onclick = function () {
+        location.href = "../Backend/dashboard.php";
+    };
+</script>
+<?php
+ }
+ else
+ {
+ ?>
+<script type="text/javascript">
+  alert("kindly login again.");
+  window.location.replace("index.html");
+</script>
+ <?php
+ } ?>
+ <script type="text/javascript">
+	$(document).ready(function(){
+		$('#database_li').attr("class","active");
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head><title>Salesperson Database</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<style>
+table, th, td {
+    border: 2px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+
+.inner
+{
+    display: inline-block;
+    padding-right: 5px;
+}
+</style>
+
+</head>
+<body>
+	<?php
+include('../UI/header.html');
+include('../Backend/connect.php');
+$user=$_SESSION["username"];
+$query=mysqli_query($con,"SELECT * from live_sessions where username = '$user'");
+$row_no=mysqli_num_rows($query);
+if($row_no==1)
+{
+  	?>
+
+
+<table id="maintable" style="width:100%">
+  <caption>Salesperson Database</caption>
+  <thead>
+  <tr class="heading">
+    <th>Salesperson Name</th>
+    <th>Region of Work</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  	<?php 
+  	$query=mysqli_query($con,"SELECT * FROM user_details WHERE level = 'user'");
+  	while($row = mysqli_fetch_array($query)){
+  	?>
+  	
+    <tr>
+    	<td><?php echo $row['first_name'].' '.$row['last_name'];?></td>
+      <td><?php echo $row['region_of_work'];?></td>
+    	<td>
+      <div id="outer">
+        <div class="inner">
+          <form action="../Backend/view_salesperson.php" method="post">
+            <input type="hidden" name="hidden_field" value="<?php echo $row['user_id']; ?>">
+            <input type="hidden" name="flag_field" value="1">
+            <button class="float-left submit-button">View
+            </button>
+          </form>
+        </div>
+        <div class="inner">
+          <form action="../Backend/edit_salesperson.php" method="post">
+            <input type="hidden" name="hidden_edit_field" value="<?php echo $row['user_id']; ?>">
+            <button class="float-left submit-button">Edit
+            </button>
+          </form>
+        </div>
+        <!--
+        <div class="inner">
+          <form action="../Backend/delete_salesperson.php" method="post">
+            <input type="hidden" name="delete_form" value="<?php echo $row['user_id'];?>">
+            <button class="float-left submit-button">Delete
+            </button>
+           </form>
+        </div>
+        -->    
+      </div>
+      </td>
+    </tr>
+    
+  <?php
+	  }
+   ?>	
+  </tbody>
+  </table>
+  <button id="filterbutton" class="float-left submit-button">Filter</button>
+<div id="filterdiv" style="display:none">
+  <ul style="list-style-type:none">
+  <?php
+    $query_filter=mysqli_query($con,"SELECT DISTINCT region_of_work FROM user_details WHERE level= 'user'");
+
+  while($row1 = mysqli_fetch_array($query_filter)){  
+  ?>
+  <li><form action=""><input type="checkbox" name="area_checkbox" value="<?php echo $row1['region_of_work']; ?>"><?php echo $row1['region_of_work']; ?></form></li>
+  <?php } ?>
+    </ul>
+    <button id="filter_go_button" class="float-left submit-button">Go</button>
+  </div>
+  <script type="text/javascript">
+    document.getElementById("filterbutton").onclick = function(){
+      $('#filterdiv').toggle();
+    }
+    document.getElementById("filter_go_button").onclick = function() {
+      $('#maintable td:nth-child(2)').each(function() {
+        if($("input[type='checkbox']:checked").val()!=($(this).html())){
+          $(this).parent().hide();
+        }
+        else{
+          $(this).parent().show();
+        }
+      })
+    }
+  </script><br>
+  <button id="MainMenuButton" class="float-left submit-button">Go Back</button>
+<script type="text/javascript">
+    document.getElementById("MainMenuButton").onclick = function () {
+        location.href = "../Backend/dashboard.php";
+    }   
+</script>
+ <script>
+$(document).ready(function(){
+ $("#salesperson_li").attr("class","active"); });
+$("salesperson_dropdown").hover(function(){
+  $("salesperson_dropdown").css("background-color","#4CAF50");
+});
+</script>
+ <?php
+    mysqli_close($con);
+ }
+ else
+ {
+ ?>
+<script type="text/javascript">
+  alert("kindly login again.");
+  window.location.replace("index.html");
+</script>
+ <?php
+ } 
+ include('../UI/footer.html');
+ ?>
+</body>
+</html>

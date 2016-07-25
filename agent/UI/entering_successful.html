@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Entry Successful!</title>
+</head>
+<body>
+<?php
+include("../UI/header.html");
+include('../Backend/connect.php');
+$user=$_SESSION["username"];
+$query=mysqli_query($con,"SELECT * from live_sessions where username = '$user'");
+$row_no=mysqli_num_rows($query);
+if($row_no==1)
+{
+  	?>
+<p>Entry Successful! Click below to go back</p>
+<button id="BackButton" class="float-left submit-button" >Go back</button>
+
+<script type="text/javascript">
+    document.getElementById("BackButton").onclick = function () {
+        location.href = "../UI/main.html";
+    };
+</script>
+<?php
+ }
+ else
+ {
+ ?>
+<script type="text/javascript">
+  alert("kindly login again.");
+  window.location.replace("index.html");
+</script>
+ <?php
+ } 
+ ?>
+</body>
+</html>

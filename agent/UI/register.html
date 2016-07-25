@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Register</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<style>
+div {
+	width: 1272px;
+	height: 48px;
+	background-color: #333;
+}
+body{
+	margin:2px;
+	padding:2px;
+}
+button {
+	margin-top:5px;
+	margin-bottom: 5px;
+  padding: 5px;
+  background-color: white;
+  border: 1px solid black;
+
+}
+button:hover {background-color: #83E5FF;}
+</style>
+</head>
+<body>
+<div></div>
+<p>Enter details to register</p>
+<form action="../Backend/register.php" method="post">
+<p>Enter Your details:</p>
+<p>First name<span style="color:red">*</span></p>
+<input type="text" name="first_name_form" placeholder="Enter your first name" pattern="[A-Za-z]+" required="required" title="Enter your first name in letters only">
+<p>Last name<span style="color:red">*</span></p>
+<input type="text" name="last_name_form" placeholder="Enter your last name" pattern="[A-Za-z]+" required="required" title="Enter your last name in letters only">
+<p>Region of Work<span style="color:red">*</span></p>
+<input type="text" name="work_area_form" placeholder="Enter your Region of Work" pattern="[A-Za-z ]+" required="required" title="Enter your preferred region of work in letters only">
+<p>Preferred Username<span style="color:red">*</span></p>
+<input type="text" placeholder="Enter a username" name="username_form" pattern="[A-Za-z0-9_]+" required="required" title="Username can contain values from A-Z, a-z, 0-9, and underscore (_)">
+<p>Password<span style="color:red">*</span></p>
+<input type="password" name="password_form" placeholder="Enter a password" minlength="8" maxlength="32" required="required" title="Password must be between 8 and 32 characters">
+<p><button type="submit" value="submit">Register</button><p>
+</body>
+</html>

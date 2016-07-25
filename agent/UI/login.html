@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<style>
+div {
+	width: 1272px;
+	height: 48px;
+	background-color: #333;
+}
+table{
+  background-color: #F1F4F5;
+
+}
+
+.heading{
+  text-align: center;
+  font-size: 20px;
+}
+h1{
+  text-align: center;
+}
+tr.heading:hover {background-color: #F1F4F5;}
+tr:hover {background-color: #B5FC94;}
+button {
+  padding: 5px;
+  background-color: white;
+  border: 1px solid black;
+
+}
+button:hover {background-color: #83E5FF;}
+body {
+  margin: 2px;
+  padding: 2px;
+  font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
+}
+.inner {
+  padding: 5px;
+}
+ul.topnav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+ul.topnav li {float: left;}
+
+ul.topnav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+ul.topnav li a:hover:not(.active) {background-color: #111;}
+
+ul.topnav li a.active {background-color: #4CAF50;}
+
+ul.topnav li.right {float: right;}
+
+@media screen and (max-width: 600px){
+    ul.topnav li.right,
+    ul.topnav li {float: none;}
+}
+</style>
+</head>
+<body style="text-align:center;">
+<div></div>
+<p style="margin-top:1cm;font-size:25px;">Enter Username and Password to login:</p>
+<form action="../Backend/login.php" method="post">
+<p style="font-size:20px;margin-top:1cm;">Username:<span style="color:red">*</span></p>
+<input type="text" name="username_form" placeholder="Enter username" pattern="[A-Za-z0-9_]+" required="required" title="Username can contain values from A-Z, a-z, 0-9, and underscore (_)">
+<p style="font-size:20px;margin-top:1cm;">Password:<span style="color:red">*</span></p>
+<input type="password" name="password_form" placeholder="Enter password" maxlength="32" required="required" title="Password must be between 8 and 32 characters">
+<p><button style="margin:1cm;" id="submit" value="submit">Login</button></p>
+</form>
+</body>
+</html>
