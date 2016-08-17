@@ -1,25 +1,24 @@
+<?php include('../UI/header.html'); ?>
 <!DOCTYPE html>
 <html>
 <head>
 <title>Agent Entry Form</title>
-
-<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-
-
 </head>
 <body>
 <?php
-include('../UI/header.html');
 include('../Backend/connect.php');
 $user=$_SESSION["username"];
 $query=mysqli_query($con,"SELECT * from live_sessions where username = '$user'");
+$query2=mysqli_query($con,"SELECT user_id from user_details where username = '$user'");
+$query2_arr=mysqli_fetch_array($query2);
 $row_no=mysqli_num_rows($query);
 if($row_no==1)
 {
 ?>
 <p>Kindly Enter the details of the new agent into the form below:<br></p>
 <form id="main_form" action="../Backend/agent_add.php" method="post">
-
+<input type="hidden" name="user_id" value="<?php echo $query2_arr['user_id']; ?>
+">
 <p style="font-weight:bold">Agent Name:<span style="color:Red">*</span><br></p>
 <input type="text" name="Agent_Name_form" placeholder="Enter Agent Name:" pattern="[A-Za-z ]+" required="required" title="Enter the Agent Name in letters only">
 
@@ -87,11 +86,10 @@ $('#sub_but').click(function (){
 <?php
  }
  else
- {
- ?>
-<script type="text/javascript">
-  alert("kindly login again.");
-  window.location.replace("index.html");
+ {?>
+<script>
+alert('Kindly login again');
+window.location.replace('../index.html');
 </script>
  <?php
  } ?>

@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,7 +68,6 @@ input#datepicker{
 	<ul class="topnav">
 	  <li><a id="dashboard_li" class="notactive" href="../Backend/dashboard.php">Dashboard</a></li>
 	  <?php include('../Backend/connect.php');
-session_start();
 if(isset($_SESSION["username"])){
 $user=$_SESSION["username"];
 $query=mysqli_query($con,"SELECT * from live_sessions where username = '$user'");
@@ -78,17 +78,12 @@ $arr=mysqli_fetch_array($query_new);
 if($arr['level']=='admin'){
 ?>
   <li><a id="salesperson_li" class="notactive" href="../UI/sales_main.html">Salespeople</a></li>
-<?php }}} mysqli_close($con); ?>  
+<?php }}}  ?>  
 	  <li><a id="database_li" class="notactive" href="../UI/main.html">Database</a></li>
 	  <li><a id="my_agents_li" class="notactive" href="../Backend/my_agents.php">My Agents</a></li>
 	  <li class="right"><a id="logout_li" href="../Backend/logout.php">Logout</a></li>
 	</ul>
 	<?php
-	$username="root";
-	$password="123456";
-	$database="agent";
-	mysqli_connect('localhost',$username,$password);
-	mysqli_select_db($database) or die( "Unable to select database");
 	$user=$_SESSION["username"];
 	$query=mysqli_query($con,"SELECT * from live_sessions where username = '$user'");
 	$row_no=mysqli_num_rows($query);

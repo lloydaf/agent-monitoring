@@ -1,38 +1,10 @@
+<?php include('../UI/header.html');?>
 <html>
 <head>
 <title>Salesperson Details</title>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-<style type="text/css">
-table, th, td, {
-    border: 2px solid black;
-    border-collapse: collapse;
-}
-th, td {
-    padding: 5px;
-    text-align: left;
-}
-
-body{
-		padding-left:1cm;
-		font-family: sans-serif;
-	}
-	p1{
-		font-weight: bold;
-	}
-	
-</style>
 </head>
-
 <body>
 <?php
-include('../UI/header.html');
 $future="";
 include('../Backend/connect.php');
 if(isset($_POST['hidden_field']))
@@ -51,10 +23,11 @@ if(isset($_POST['hidden_field']))
 	?>
 	<button id="MainMenuButton" class="float-left submit-button">Go Back</button>
 	<br>
+	<?php /*
 	<form action="view_salesperson_visits.php" method="post">
 	<input type="hidden" name="user_id_form" value='<?php echo $user_id;?>'>
 	<button type="submit" value="submit">View Visits of <?php echo $future; ?></button>
-	</form>
+	</form> */ ?>
 
 	<script type="text/javascript">
 	    document.getElementById("MainMenuButton").onclick = function () {
@@ -64,8 +37,10 @@ if(isset($_POST['hidden_field']))
 	<form action="my_agents.php" method="post"><input type="hidden" name="agent_view_form" value="<?php echo $user_id; ?>">
 	<input type="hidden" name="value_form" value="1">
 	<button type="submit" value="submit">View Agents of <?php echo $future;?></button></form>
+		<?php /*
+
 	<form action="view_salesperson_schedule.php" method="post"><input type="hidden" name="schedule_form" value="<?php echo $user_id;?>">
-	<button type="submit" value="submit">View Scheduled Visits of <?php echo $future;?></button>
+	<button type="submit" value="submit">View Scheduled Visits of <?php echo $future;?></button></form> */?>
 	<?php 
 if(isset($_POST['flag_field']))
 	{
@@ -93,7 +68,6 @@ else
 		<?php
 		mysqli_close($con);
 }
-include('../UI/footer.html');
 ?>
 </body>
 </html>

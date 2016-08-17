@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html>
 <head><title>Login</title></head>
@@ -18,7 +19,6 @@ while($row=mysqli_fetch_array($query)){
 		$user_id= $row['user_id'];
 		mysqli_query($con,"INSERT INTO live_sessions(username) VALUES('$user')");
 		mysqli_close($con);
-		session_start();
 		$_SESSION['username']=$user;
 		$_SESSION['user_id']=$user_id;
 		} 	

@@ -1,30 +1,18 @@
+<?php include('../UI/header.html'); ?>
 <!DOCTYPE html>
 <html>
 <head><title>Database</title>
-<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-<style>
-table, th, td {
-    border: 2px solid black;
-    border-collapse: collapse;
-}
-th, td {
-    padding: 5px;
-    text-align: center;
-}
-
-.inner
-{
-    display: inline-block;
-    padding-right: 5px;
-}
-</style>
-
 </head>
 <body>
 <?php
-include('header.html');
+
+
 include('../Backend/connect.php');
 $user=$_SESSION["username"];
+$query_lev=mysqli_query($con,"SELECT * from user_details where username = '$user'");
+$arr_lev=mysqli_fetch_array($query_lev);
+if($arr_lev['level']!='admin')
+{die('No authorization to view this page');}
 $query=mysqli_query($con,"SELECT * from live_sessions where username = '$user'");
 $row_no=mysqli_num_rows($query);
 if($row_no==1)
@@ -39,7 +27,8 @@ if($row_no==1)
     <th>Person of Contact</th>
     <th>Contact Number</th>
     <th>City</th>
-    <th>Available to Add</th>
+    <!--
+    <th>Available to Add</th> -->
     <th>Monitored by:</th>
     <th>Actions</th>
   </tr>
@@ -55,7 +44,8 @@ if($row_no==1)
     	<td><?php echo $row['POC'];?></td>
     	<td><?php echo $row['Contact_No'];?></td>
     	<td><?php echo $row['City'];?></td>
-    	<td><?php if($row['Available_to_add']) echo 'Yes'; else echo 'No';?></td>
+      <!--
+    	<td><?php if($row['Available_to_add']) echo 'Yes'; else echo 'No';?></td> -->
       <td><?php
       if($row['Available_to_add']==1){
       echo 'No one';
@@ -74,7 +64,8 @@ if($row_no==1)
       <div class="inner"><form action="../Backend/edit_agent.php" method="post"><input type="hidden" name="hidden_edit_field" value="<?php echo $row['Contact_No'];?>"><input type="hidden" name="flag_field" value="1"><button class="float-left submit-button">Edit</button></form></div>
       <?php
       }
-      ?><div class="inner"><form action="../Backend/add_my_agent.php" method="post"><input type="hidden" name="hidden_my_agents_field" value="<?php echo $row['Contact_No']; ?>"><button id="myagentsbutton" class="float-left submit-button">Add to My Agents</button></form></div></div></td>
+      ?>
+      <!-- <div class="inner"><form action="../Backend/add_my_agent.php" method="post"><input type="hidden" name="hidden_my_agents_field" value="<?php echo $row['Contact_No']; ?>"><button id="myagentsbutton" class="float-left submit-button">Add to My Agents</button></form></div>--> </div></td>
     </tr>
     
   <?php
@@ -127,12 +118,10 @@ $(document).ready(function(){
  }
  else
  {
- ?>
-<script type="text/javascript">
-  alert("kindly login again.");
-  window.location.replace("index.html");
-</script>
- <?php
+?><script>
+alert('Kindly login again');
+window.location.replace('../index.html');
+</script><?php
  } 
  include('../UI/footer.html');
  ?>

@@ -1,6 +1,6 @@
 <?php
-include('../Backend/connect.php');
 session_start();
+include('../Backend/connect.php');
 $user_id=$_SESSION['user_id'];
 $contact_no=$_POST['hidden_my_agents_field'];
 $flag_query=mysqli_query($con,"SELECT user_id from agent_info where Contact_No = '$contact_no'");

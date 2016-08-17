@@ -1,3 +1,4 @@
+<?php include('../UI/header.html');?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +24,6 @@ th, td {
 </head>
 <body>
 <?php
-include('../UI/header.html');
 include('../Backend/connect.php');
 $user=$_SESSION["username"];
 $query1=mysqli_query($con,"SELECT * from live_sessions where username = '$user'");
@@ -99,13 +99,14 @@ if($row_no==1)
               </button>
             </form>
           </div>
+          <?php /*
           <div class="inner">
             <form action="../Backend/add_visit.php" method="post">
               <input type="hidden" name="visit_field" value="<?php echo $row['Contact_No']; ?>">
               <button class="float-left submit-button">Add Visit
               </button>
             </form>
-          </div>
+          </div>*/?>
           <div class="inner">
             <form action="view_visits.php" method="post">
               <input type="hidden" name="contact_no_form" value="<?php echo $row['Contact_No'];?>">
@@ -114,6 +115,7 @@ if($row_no==1)
               </button>
             </form>
           </div>
+          <?php /*
           <div class="inner">
             <form action="schedule_visit.php" method="post">
               <input type="hidden" name="schedule_visit_form" value="<?php echo $row['Contact_No'];?>">
@@ -128,7 +130,7 @@ if($row_no==1)
               <button class="float-left submit-button">View Scheduled
               </button>
             </form>
-          </div>
+          </div> */?>
         <?php }?>
         </td>
       </tr>

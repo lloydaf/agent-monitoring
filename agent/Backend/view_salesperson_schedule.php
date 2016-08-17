@@ -1,23 +1,11 @@
+<?php include('../UI/header.html');?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Visit Statistics</title>
-	<style>
-table, th, td {
-    border: 2px solid black;
-    border-collapse: collapse;
-}
-th, td {
-    padding: 5px;
-    text-align: left;
-}
-
-
-</style>
 </head>
 <body>
 <?php
-include('../UI/header.html');
 include('../Backend/connect.php');
 $user=$_SESSION['username'];
 $query=mysqli_query($con,"SELECT * from live_sessions where username = '$user'");

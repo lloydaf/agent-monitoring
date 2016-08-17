@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,7 +7,6 @@
 <body>
 <?php
 include('../Backend/connect.php');
-session_start();
 $user=$_SESSION['username'];
 if(isset($_POST['contact_no_form'])){
 

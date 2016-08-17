@@ -1,3 +1,4 @@
+<?php include ('../UI/header.html');?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,7 +6,6 @@
 </head>
 <body>
 <?php
-include('../UI/header.html');
 include('../Backend/connect.php');
 $user=$_SESSION['username'];
 $query=mysqli_query($con,"SELECT * from live_sessions where username = '$user'");
@@ -18,14 +18,19 @@ $row=mysqli_fetch_array($query);
 <p style="font-weight:bold;">Salesperson Details:</p>
 <p><button id="viewsalespersonbutton" class="float-left submit-button">View Salesperson Info</button></p>
 <p><button id="activatesalespersonbutton" class="float-left submit-button">Activate Salesperson Account</button></p>
+<p><button id="viewactivityreportbutton">View Activity Report</button></p>
 <p style="font-weight:bold;">Agent Details:</p>
 <p><button id="viewagentdatabase" class="float-left submit-button">View Agent Database</button></p>
 <p><button id="addagentbutton" class="float-left submit-button">Add Agent</button></p>
 <p><button id="myagentsbutton" class="float-left submit-button">My Agents</button></p>
+<p><button id="AddDailyReport" class="float-left submit-button" >Add Daily Report</button></p>
 <p style="font-weight:bold;">Settings:</p>
 <p><button id="logoutbutton" class="float-left submit-button">Logout</button></p>
 <p><button id="ChangePasswordButton" class="float-left submit-button">Change Password</button></p>
 <script type="text/javascript">
+document.getElementById("viewactivityreportbutton").onclick = function() {
+    location.href="view_salesperson_visits.php";
+}
     document.getElementById("ChangePasswordButton").onclick = function() {
         location.href="change_password.php";
     }
@@ -47,6 +52,9 @@ document.getElementById("viewsalespersonbutton").onclick = function () {
     document.getElementById("myagentsbutton").onclick = function () {
     	location.href = "my_agents.php";
     }
+    document.getElementById("AddDailyReport").onclick = function() {
+        location.href = "add_visit.php";
+    };
     $(document).ready(function(){
     $('#dashboard_li').attr('class','active'); });
 </script>

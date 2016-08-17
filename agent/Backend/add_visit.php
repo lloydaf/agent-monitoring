@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,7 +82,6 @@ ul.topnav li.right {float: right;}
 <ul class="topnav">
   <li><a id="dashboard_li" class="notactive" href="../Backend/dashboard.php">Dashboard</a></li>
   <?php include('../Backend/connect.php');
-session_start();
 if(isset($_SESSION["username"])){
 $user=$_SESSION["username"];
 $query=mysqli_query($con,"SELECT * from live_sessions where username = '$user'");
@@ -92,34 +92,49 @@ $arr=mysqli_fetch_array($query_new);
 if($arr['level']=='admin'){
 ?>
   <li><a id="salesperson_li" class="notactive" href="../UI/sales_main.html">Salespeople</a></li>
-<?php }}} mysqli_close($con); ?>  
+
   <li><a id="database_li" class="notactive" href="../UI/main.html">Database</a></li>
+  <?php }}} ?>  
   <li><a id="my_agents_li" class="notactive" href="../Backend/my_agents.php">My Agents</a></li>
   <li class="right"><a id="logout_li" href="../Backend/logout.php">Logout</a></li>
 </ul>
 
 <?php
-
-$username="root";
-$password="123456";
-$database="agent";
-mysqli_connect('localhost',$username,$password);
-mysqli_select_db($database) or die( "Unable to select database");
-$user=$_SESSION["username"];
-$query=mysqli_query($con,"SELECT * from live_sessions where username = '$user'");
-$row_no=mysqli_num_rows($query);
 if($row_no==1)
 {
-	$contact_no=$_POST['visit_field'];
+  $query_user_id=mysqli_query($con,"SELECT * from user_details where username= '$user'");
+  $arr_user_id=mysqli_fetch_array($query_user_id);
+  $user_id=$arr_user_id['user_id'];
+  $agent_list_query=mysqli_query($con,"SELECT Contact_No, Agent_Name from agent_info WHERE user_id='$user_id'");
+  
+  
 ?>
-<p>Click submit to add visit date:<span style="color:red">*</span></p>
+<p>Select date:<span style="color:red">*</span></p>
 <form id="date_form" action="visit_enter.php" method="post">
 <p><input type="text" id="datepicker" name="date_form" required="required" pattern="^\d{4}-\d{2}-\d{2}$" title="Please enter a valid date"></p>
+<p>Agent:<span style="color:red">*</span></p>
+<select name="contact_no_form" class="agent_list_class" id="agent_list">
+</select>
 <p>Feedback from visit:<span style="color:red">*</span></p>
 <textarea name="feedback_form" form="date_form" required="required"></textarea><br>
-<input type="hidden" name="contact_no_form" value="<?php echo $contact_no; ?>">
 <button id="submit_button" class="float-left submit-button" value="submit">Submit</button>
 </form>
+<br>
+<button type="float-left submit-button" id="backbutton">Go Back</button>
+<script type="text/javascript">
+var list='<option value="0" selected="selected">Select Agent</option>';
+<?php while($agent_list_arr=mysqli_fetch_array($agent_list_query,MYSQL_ASSOC))
+{ ?>
+var values=<?php echo json_encode($agent_list_arr['Agent_Name']); ?>;
+var keys=<?php echo json_encode($agent_list_arr['Contact_No']); ?>;
+list+='<option value="' + keys + '" > ' + values + '</option>';
+<?php } ?>
+$('#agent_list').html(list); 
+$('#backbutton').click(function(){
+  window.location.replace('../Backend/dashboard.php');
+});
+</script>
+
 <?php
 }
 else

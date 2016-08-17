@@ -1,0 +1,1 @@
+[25-Jul-2016 22:07:39] PHP Warning:  session_start() [<a href='function.session-start'>function.session-start</a>]: Cannot send session cache limiter - headers already sent (output started at /home1/lloydaf1/public_html/agent/UI/sales_main.html:24) in /home1/lloydaf1/public_html/agent/UI/header.html on line 1

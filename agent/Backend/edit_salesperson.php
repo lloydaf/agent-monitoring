@@ -1,10 +1,10 @@
+<?php include('../UI/header.html');?>
 <!DOCTYPE html>
 <html>
 <head>
 <title>Register</title>
 </head>
 <body>
-<?php include('../UI/header.html');?>
 <p>Enter details to be changed</p>
 <form action="../Backend/edit_sales_enter.php" method="post">
 <p>Enter Your details:</p>

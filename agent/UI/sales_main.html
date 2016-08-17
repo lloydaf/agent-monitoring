@@ -1,7 +1,9 @@
+<?php
+include('../UI/header.html');
+?>
 <!DOCTYPE html>
 <html>
 <head><title>Salesperson Database</title>
-<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <style>
 table, th, td {
     border: 2px solid black;
@@ -21,8 +23,7 @@ th, td {
 
 </head>
 <body>
-	<?php
-include('../UI/header.html');
+<?php
 include('../Backend/connect.php');
 $user=$_SESSION["username"];
 $query=mysqli_query($con,"SELECT * from live_sessions where username = '$user'");

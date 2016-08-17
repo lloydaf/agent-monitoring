@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,7 +7,6 @@
 <body>
 <?php
 include('../Backend/connect.php');
-session_start();
 $user=$_SESSION["username"];
 $query=mysqli_query($con,"SELECT * from live_sessions where username = '$user'");
 $row_no=mysqli_num_rows($query);

@@ -1,30 +1,11 @@
+<?php include('../UI/header.html');?>
 <html>
 <head>
 <title>Agent Details</title>
-<style type="text/css">
-<style>
-table, th, td, {
-    border: 2px solid black;
-    border-collapse: collapse;
-}
-th, td {
-    padding: 5px;
-    text-align: left;
-}
-
-body{
-		font-family: sans-serif;
-	}
-	p1{
-		font-weight: bold;
-	}
-	
-</style>
 </head>
 
 <body>
 <?php
-include('../UI/header.html');
 $future="";
 include('../Backend/connect.php');
 if(isset($_POST['hidden_field']))

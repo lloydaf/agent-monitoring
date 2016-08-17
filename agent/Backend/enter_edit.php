@@ -1,3 +1,4 @@
+<?php include('../UI/header.html');?>
 <DOCTYPE html>
 <html>
 <head>
@@ -5,7 +6,6 @@
 </head>
 <body>
 <?php
-include('../UI/header.html');
 include('../Backend/connect.php');
 $agent_name=$_POST['Agent_Name_form'];
 $add_line_1=$_POST['Agent_Address_line1_form'];

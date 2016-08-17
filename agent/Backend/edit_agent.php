@@ -1,3 +1,4 @@
+<?php include ('../UI/header.html');?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +13,6 @@
 </head>
 <body>
 <?php
-include('../UI/header.html');
 include('../Backend/connect.php');
 $ref_no=$_POST['hidden_edit_field'];
 $query=mysqli_query($con,"SELECT * FROM agent_details WHERE agent_contact_number = '$ref_no'");

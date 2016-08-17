@@ -1,3 +1,4 @@
+<?php include('../UI/header.html');?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,10 +14,12 @@ th, td {
 }
 	
 </style>
+<script type="text/javascript">
+	$("#salesperson_li").attr("class","active");
+</script>
 </head>
 <body>
 <?php
-include('../UI/header.html');
 include('../Backend/connect.php');
 $user=$_SESSION["username"];
 $query=mysqli_query($con,"SELECT * from live_sessions where username = '$user'");
